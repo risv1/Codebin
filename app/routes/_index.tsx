@@ -1,9 +1,25 @@
-const Home = () => {
-  return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <h1 className="text-5xl font-bold">Codebin</h1>
-    </div>
-  );
-}
+import DescOne from "~/components/DescOne";
+import DescThree from "~/components/DescThree";
+import DescTwo from "~/components/DescTwo";
+import Nav from "~/components/Nav";
 
-export default Home
+const HomePage = () => {
+  return (
+    <>
+      <Nav />
+      <div className="w-screen bg-black h-full flex justify-center items-center flex-col">
+        <div className="w-full h-[90vh] flex">
+          <DescOne />
+        </div>
+        <div className="w-full flex">
+          <DescTwo />
+        </div>
+        <div className="w-full h-screen flex">
+          <DescThree />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default HomePage;

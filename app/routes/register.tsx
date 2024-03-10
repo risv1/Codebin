@@ -14,7 +14,7 @@ export async function action({ request }: { request: Request }) {
   return user;
 }
 
-const Login = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -51,4 +51,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default RegisterPage;
