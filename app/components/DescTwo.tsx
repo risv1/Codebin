@@ -19,8 +19,8 @@ const DescTwo = () => {
           </p>
         </div>
       </div>
-      <div className="w-1/2 h-fullflex flex-col justify-center items-center p-14 gap-5">
-        <div className="w-11/12 border-4 border-gray-800 rounded-xl h-full overflow-y-scroll p-4 bg-black text-white font-mono text-sm">
+      <div className="w-1/2 h-full flex flex-col justify-center items-center p-14 gap-5">
+        <div className="w-11/12 border-4 border-gray-800 rounded-xl h-full overflow-y-auto p-4 bg-black text-white font-mono text-sm">
           {`import React from 'react';
       import { useDropzone } from 'react-dropzone';
 
@@ -43,7 +43,7 @@ const DescTwo = () => {
             .split("\n")
             .map((line, index) => (
               <div className="flex w-full justify-start items-center h-10">
-                <p key={index} className="text-green-400">
+                <p key={index} className="text-white">
                   {index + 1}. {line}
                 </p>
               </div>

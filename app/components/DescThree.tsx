@@ -9,8 +9,8 @@ const DescThree = () => {
       style={{ borderTopRightRadius: "20rem" }}
       className="w-full h-full bg-sky-300 flex justify-center items-center"
     >
-      <div className="w-2/3 h-4/5 bg-white mt-32 rounded flex flex-row">
-        <div className="w-1/2 h-full border-black border flex justify-center items-center items p-8 flex-col">
+      <div className="w-2/3 h-4/5 bg-white shadow-sm shadow-gray-500 mt-32 rounded flex flex-row">
+        <div className="w-1/2 h-full flex justify-center items-center items p-8 flex-col">
           <div className="w-4/5 self-center">
             <h1 className="text-3xl text-black font-bold">
               Codebin is built keeping accessibility in mind

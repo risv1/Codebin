@@ -2,13 +2,6 @@ import { Form } from "@remix-run/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-export async function action ({ request }: { request: Request }){    
-    const formData = await request.formData()
-    const userData = Object.fromEntries(formData)
-    console.log(userData)
-
-}
-
 const LoginForm = () => {
     return(
         <div className="w-full h-full flex">
