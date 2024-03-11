@@ -7,20 +7,20 @@ const TextForm = () => {
     { value: "c", label: "C" },
     { value: "cpp", label: "C++" },
     { value: "java", label: "Java" },
-    { value: "python", label: "Python" },
-    { value: "javascript", label: "JavaScript" },
-    { value: "typescript", label: "TypeScript" },
+    { value: "py", label: "Python" },
+    { value: "js", label: "JavaScript" },
+    { value: "ts", label: "TypeScript" },
     { value: "ruby", label: "Ruby" },
     { value: "php", label: "PHP" },
     { value: "swift", label: "Swift" },
     { value: "kotlin", label: "Kotlin" },
-    { value: "rust", label: "Rust" },
+    { value: "rs", label: "Rust" },
     { value: "go", label: "Go" },
     { value: "scala", label: "Scala" },
     { value: "perl", label: "Perl" },
     { value: "r", label: "R" },
     { value: "shell", label: "Shell" },
-    { value: "csharp", label: "C#" },
+    { value: "c", label: "C#" },
   ];
 
   const handleTab = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -40,6 +40,7 @@ const TextForm = () => {
     <Form method="post" className="w-full h-full flex p-5">
       <div className="w-1/2 h-full border-4 border-gray-800 rounded">
         <textarea
+          required
           name="data"
           onKeyDown={handleTab}
           className="w-full h-full p-5 bg-black focus:outline-none text-gray-300 font-semibold text-xl"

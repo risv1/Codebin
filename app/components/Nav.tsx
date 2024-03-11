@@ -14,6 +14,9 @@ const Nav = () => {
                     <Link to={"/upload"} className="text-3xl hover:text-white font-medium text-black">
                         Upload
                     </Link>
+                    <Link to={"/browse"} className="text-3xl hover:text-white font-medium text-black">
+                        Browse
+                    </Link>
                     <Link to={"/login"} className="bg-opacity-90 hover:bg-opacity-100 text-2xl hover:border-white border-sky-300 border-4 text-white bg-black pl-7 pr-7 pt-2 pb-2 mb-1 font-semibold rounded-full">
                         Login
                     </Link>
