@@ -1,0 +1,78 @@
+import AWS from "aws-sdk";
+
+AWS.config.update({
+  region: "us-east-1",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+const s3 = new AWS.S3();
+
+export function UploadS3(fileName: string, fileData: string) {
+  try {
+    const params = {
+      Bucket: "code-bin",
+      Key: fileName,
+      Body: fileData,
+    };
+
+    s3.upload(params, (err: Error, data: any) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(`File uploaded successfully!, Location: ${data.Location}`);
+      }
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function FetchAllS3(): Promise<string[]> | undefined {
+  try {
+    return new Promise((resolve, reject) => {
+      const params = {
+        Bucket: "code-bin",
+      };
+
+      s3.listObjectsV2(params, (err: Error, data: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (data && data.Contents) {
+            const files = data.Contents.map((file) => file.Key);
+            resolve(files.filter((file: any) => file !== undefined) as string[]);
+          } else {
+            reject(new Error("Invalid response from S3"));
+          }
+        }
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function FetchOneS3(fileName: string): Promise<string> | undefined {
+  try {
+    return new Promise((resolve, reject) => {
+      const params = {
+        Bucket: "code-bin",
+        Key: fileName,
+      };
+
+      s3.getObject(params, (err: Error, data: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (data && data.Body) {
+            resolve(data.Body.toString());
+          } else {
+            reject(new Error("Invalid response from S3"));
+          }
+        }
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
