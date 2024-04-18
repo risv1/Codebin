@@ -46,6 +46,7 @@
             />
           </div>
           <button
+          @click="handleSubmit"
             class="border-2 rounded text-xl flex justify-center mt-3 items-center bg-gray-600 text-white font-semibold w-32 h-12"
           >
             Submit
@@ -91,4 +92,22 @@ const handleTab = (e: any) => {
     e.target.selectionStart = e.target.selectionEnd = start + 1;
   }
 };
+
+const handleSubmit = async(e: any) => {
+  e.preventDefault();
+  const res = await fetch("http://localhost:3000/api/upload", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: data.value,
+      name: title.value+"."+filetype.value,
+      password: password.value,
+    }),
+  });
+  const returnedData = await res.json();
+  console.log(returnedData);
+};
+
 </script>

@@ -1,11 +1,12 @@
 import AWS from "aws-sdk";
 
 AWS.config.update({
-  region: "us-east-1",
+  region: "ap-south-1",
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
-const s3 = new AWS.S3();
+
+export const s3 = new AWS.S3();
 
 export function UploadS3(fileName: string, fileData: string) {
   try {
@@ -39,7 +40,7 @@ export function FetchAllS3(): Promise<string[]> | undefined {
           reject(err);
         } else {
           if (data && data.Contents) {
-            const files = data.Contents.map((file) => file.Key);
+            const files = data.Contents.map((file: any) => file.Key);
             resolve(files.filter((file: any) => file !== undefined) as string[]);
           } else {
             reject(new Error("Invalid response from S3"));

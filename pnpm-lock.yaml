@@ -23,6 +23,9 @@ dependencies:
   '@types/uuid':
     specifier: ^9.0.8
     version: 9.0.8
+  '@types/vue':
+    specifier: ^2.0.0
+    version: 2.0.0
   aws-sdk:
     specifier: ^2.1601.0
     version: 2.1601.0
@@ -54,7 +57,7 @@ dependencies:
     specifier: ^9.0.1
     version: 9.0.1
   vue:
-    specifier: ^3.4.21
+    specifier: ^3.4.23
     version: 3.4.23
   vue-router:
     specifier: ^4.3.0
@@ -2181,6 +2184,15 @@ packages:
 
   /@types/uuid@9.0.8:
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
+    dev: false
+
+  /@types/vue@2.0.0:
+    resolution: {integrity: sha512-WDElkBv/o4lVwu6wYHB06AXs4Xo2fwDjJUpvPRc1QQdzkUSiGFjrYuSCy8raxLE5FObgKq8ND7R5gSZTFLK60w==}
+    deprecated: This is a stub types definition for vuejs (https://github.com/vuejs/vue). vuejs provides its own type definitions, so you don't need @types/vue installed!
+    dependencies:
+      vue: 3.4.23
+    transitivePeerDependencies:
+      - typescript
     dev: false
 
   /@types/web-bluetooth@0.0.20:

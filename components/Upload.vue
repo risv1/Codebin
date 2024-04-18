@@ -19,7 +19,7 @@
                           file:bg-gray-40 file:text-sky-500
                         hover:file:bg-sky-200"
             ></input>
-            <button class="h-2/3 w-fit p-2 border-4 border-sky-500 bg-sky-300 text-white font-semibold">
+            <button @click="uploadFile" class="h-2/3 w-fit p-2 border-4 border-sky-500 bg-sky-300 text-white font-semibold">
               Submit
             </button>
           </form>
@@ -28,3 +28,39 @@
       <div class="bg-black w-full h-[50vh]"></div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const fileInput = ref<HTMLInputElement | null>(null);
+
+const uploadFile = async (e: any) => {
+  e.preventDefault()
+  if (!fileInput.value || !fileInput.value.files || fileInput.value.files.length === 0) return alert('Please select a file');
+
+  const file = fileInput.value.files[0];
+  const formFile = {
+    name: file.name,
+    body: file
+  }
+  try {
+    const response = await fetch("http://localhost:3000/api/upload", {
+      method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+      body: JSON.stringify(formFile),
+    });
+
+    if (!response.ok) {
+      throw new Error('Upload failed');
+    }
+    const returnedData = await response.json();
+  console.log(returnedData);
+
+    console.log('File uploaded successfully');
+  } catch (error) {
+    console.error(error);
+  }
+};
+</script>
