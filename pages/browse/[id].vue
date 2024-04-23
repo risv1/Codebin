@@ -8,6 +8,7 @@
                 <p class="text-white pl-5 font-medium text-xl">File ID: <span class="text-sky-300">{{ file.id }}</span></p>
             </div>
             <button @click="copyToClipboard" class="text-white text-lg self-start pl-5 font-medium underline">Copy Text</button>
+            <button @click="downloadFile(file.fileName, file.fileData)" class="text-white text-lg self-start pl-5 font-medium underline">Download File</button>
             <div class="w-full h-full flex flex-col p-5 mt-5">
                 <pre id="fileData" class="text-white">{{ file.fileData }}</pre>
             </div>
@@ -15,13 +16,21 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     const route = useRoute()
     const id = route.params.id
     const file = ref({fileName: "", fileData: "", id: ""})
 
+    const downloadFile = async(fileName: string, fileData: string) => {
+        const blob = new Blob([fileData], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+    }
+
     const copyToClipboard = () => {
-    const textToCopy = document.getElementById('fileData').innerText;
+    const textToCopy = document.getElementById('fileData')?.innerText as string;
     navigator.clipboard.writeText(textToCopy);
   };
 

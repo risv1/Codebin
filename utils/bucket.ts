@@ -28,31 +28,6 @@ export function UploadS3(fileName: string, fileData: string) {
   }
 }
 
-export function FetchAllS3(): Promise<string[]> | undefined {
-  try {
-    return new Promise((resolve, reject) => {
-      const params = {
-        Bucket: "code-bin",
-      };
-
-      s3.listObjectsV2(params, (err: Error, data: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          if (data && data.Contents) {
-            const files = data.Contents.map((file: any) => file.Key);
-            resolve(files.filter((file: any) => file !== undefined) as string[]);
-          } else {
-            reject(new Error("Invalid response from S3"));
-          }
-        }
-      });
-    });
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 export function FetchOneS3(fileName: string): Promise<string> | undefined {
   try {
     return new Promise((resolve, reject) => {
@@ -77,5 +52,3 @@ export function FetchOneS3(fileName: string): Promise<string> | undefined {
     console.error(e);
   }
 }
-
-
