@@ -12,7 +12,9 @@
             <input
               required
               name="file"
+              ref="fileInput"
               type="file"
+              @change="updateFileInput"
               class="border-dotted border-sky-500 border-4 h-2/3 w-4/5 file:mr-4 file:py-2 file:px-4
                           file:rounded-full file:border-0
                           file:text-sm file:font-semibold
@@ -34,33 +36,49 @@ import { ref } from 'vue';
 
 const fileInput = ref<HTMLInputElement | null>(null);
 
-const uploadFile = async (e: any) => {
-  e.preventDefault()
-  if (!fileInput.value || !fileInput.value.files || fileInput.value.files.length === 0) return alert('Please select a file');
-
-  const file = fileInput.value.files[0];
-  const formFile = {
-    name: file.name,
-    body: file
-  }
-  try {
-    const response = await fetch("http://localhost:3000/api/upload", {
-      method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-      body: JSON.stringify(formFile),
-    });
-
-    if (!response.ok) {
-      throw new Error('Upload failed');
-    }
-    const returnedData = await response.json();
-  console.log(returnedData);
-
-    console.log('File uploaded successfully');
-  } catch (error) {
-    console.error(error);
+const updateFileInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.files) {
+    fileInput.value = target;
   }
 };
+
+const uploadFile = async (e: any) => {
+  e.preventDefault()
+  if (!fileInput.value || !fileInput.value.files || fileInput.value.files.length === 0){
+    return alert('Please select a file');
+  }
+
+  const file = fileInput.value.files[0];
+
+  const fileReader = new FileReader();
+  fileReader.onload = async () => {
+    try {
+      const fileData = fileReader.result as string;
+      const response = await fetch("http://localhost:3000/api/upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: file.name, data: fileData })
+      });
+      const returnedData = await response.json();
+      if (returnedData.statusCode !== 200) {
+        console.error(returnedData);
+        alert('Upload failed');
+        throw new Error('Upload failed');
+      } else {
+      console.log(returnedData)
+      console.log('File uploaded successfully');
+      alert('File uploaded successfully');
+      }
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
+  };
+
+  fileReader.readAsText(file);
+};
+
 </script>

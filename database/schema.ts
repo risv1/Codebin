@@ -8,3 +8,12 @@ export const users = pgTable("users", {
     created_at: date("created_at").defaultNow(),
     updated_at: date("updated_at").defaultNow(),
   });
+
+export const files = pgTable("files", {
+    id: varchar("id").primaryKey(),
+    fileName: text("name").notNull(),
+    uploadedBy: text("uploadedBy").notNull().references(()=>users.id),
+    password: text("password"),
+    created_at: date("created_at").defaultNow(),
+    updated_at: date("updated_at").defaultNow(),
+})
