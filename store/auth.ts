@@ -10,6 +10,9 @@ export const useAuthStore = defineStore({
   state: () => ({
     user: null as User | null
   }),
+  persist: {
+    storage: persistedState.localStorage,
+  },
   actions: {
     async fetchUser(){
         const res = await fetch("http://localhost:3000/api/session", {
