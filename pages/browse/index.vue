@@ -7,8 +7,9 @@
         <input v-model="search" type="text" placeholder="Search files" class="self-center mb-3">
         <ul v-if="error === null" class="self-center gap-3 flex flex-col pt-2 w-[20vw]">
         <li v-for="(file, index) in filteredFiles" :key="index" class="flex justify-between items-center">
-          <span class="text-xl"><span class="text-xl font-bold">{{ index+1 }}</span>: {{ file[1] }}</span>
-          <button @click="goTo(file[0])" class="bg-green-500 rounded-lg p-2 text-white">Open</button>
+          <span v-if="filteredFiles.length!==0" class="text-xl"><span class="text-xl font-bold">{{ index+1 }}</span>: {{ file[1] }}</span>
+          <button @click="goTo(file[0])" v-if="filteredFiles.length!==0" class="bg-green-500 rounded-lg p-2 text-white">Open</button>
+          <div v-else class="font-bold text-xl">No files found</div>
         </li>
       </ul>
       <div v-else class="self-center flex justify-center items-center w-full h-2/3">

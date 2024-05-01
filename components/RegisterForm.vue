@@ -45,24 +45,41 @@
 </template>
 
 <script setup lang="ts">
+import { z } from "zod";
 const name = ref("");
 const email = ref("");
 const password = ref("");
 
+const config = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
 const onSubmit = async (event: Event) => {
   event.preventDefault();
   try {
+
+    const body = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    };
+
+    const validationResult = config.safeParse(body);
+    if (!validationResult.success) {
+      alert("Invalid input. Please try again.");
+      console.log(validationResult.error);
+      return;
+    }
+
     const res = await fetch("http://localhost:3000/api/register", {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: String(name.value),
-        email: String(email.value),
-        password: String(password.value),
-      }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       alert("Unable to register. Please try again.");
@@ -71,7 +88,8 @@ const onSubmit = async (event: Event) => {
         statusCode: res.status,
       });
     }
-    console.log("Login successful");
+    alert("Registration successful");
+    console.log("Registration successful");
   } catch (err) {
     console.log(err);
   }

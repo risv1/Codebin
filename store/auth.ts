@@ -21,7 +21,7 @@ export const useAuthStore = defineStore({
           this.user = data.userData
           console.log("User set: ", this.user)
     },
-    async setUser(user: {email: string, name: string}){
+    async setUser(user: {email: string, name: string} | null){
         this.user = user
     }
   }
