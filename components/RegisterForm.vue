@@ -88,6 +88,12 @@ const onSubmit = async (event: Event) => {
         statusCode: res.status,
       });
     }
+    const data = await res.json();
+    if(data.statusCode !== 200) {
+      alert("Registration failed");
+      console.log(data.message);
+      return;
+    }
     alert("Registration successful");
     console.log("Registration successful");
   } catch (err) {

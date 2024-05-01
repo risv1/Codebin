@@ -81,10 +81,13 @@ const onSubmit = async (event: Event) => {
       });
     }
     const response = await res.json();
-    if (response) {
+    if (response.statusCode === 200) {
       setUser(response.user);
       alert("Login successful");
       navigateTo("/");
+    }else{
+      alert("Login failed");
+      console.log(response.message);
     }
   } catch (err) {
     console.error(err);
