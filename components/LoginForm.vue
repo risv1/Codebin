@@ -81,6 +81,10 @@ const onSubmit = async (event: Event) => {
       });
     }
     const response = await res.json();
+    if(!response){
+      alert("Unable to login. Please try again.");
+      console.log(response);
+    }
     if (response.statusCode === 200) {
       setUser(response.user);
       alert("Login successful");
