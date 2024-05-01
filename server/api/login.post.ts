@@ -10,7 +10,7 @@ export default defineEventHandler(async(event)=>{
 
         const [user] = await db.select().from(users).where(eq(users.email, body.email))
         if(!user){
-            throw new Error("User not found"), {
+            return {
                 statusCode: 404,
                 message: "User not found"
             }
