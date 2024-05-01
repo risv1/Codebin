@@ -95,7 +95,7 @@ const handleTab = (e: any) => {
 
 const handleSubmit = async(e: any) => {
   e.preventDefault();
-  const res = await fetch("http://localhost:3000/api/upload", {
+  const res = await fetch("/api/upload", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

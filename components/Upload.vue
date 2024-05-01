@@ -55,7 +55,7 @@ const uploadFile = async (e: any) => {
   fileReader.onload = async () => {
     try {
       const fileData = fileReader.result as string;
-      const response = await fetch("http://localhost:3000/api/upload", {
+      const response = await fetch("/api/upload", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

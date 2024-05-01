@@ -17,9 +17,11 @@
 </template>
 
 <script setup lang="ts">
+    import { useAuthStore } from '~/store/auth';
     const route = useRoute()
     const id = route.params.id
     const file = ref({fileName: "", fileData: "", id: ""})
+    const {user} = useAuthStore()
 
     const downloadFile = async(fileName: string, fileData: string) => {
         const blob = new Blob([fileData], { type: 'text/plain' });
@@ -34,9 +36,15 @@
     navigator.clipboard.writeText(textToCopy);
   };
 
+  onMounted(()=>{
+    if(!user){
+      navigateTo("/login")
+    }
+  })
+
     watchEffect(() => {
         const fetchFile = async() => {
-            const res = await fetch(`http://localhost:3000/api/get-file/${id}`, {
+            const res = await fetch(`/api/get-file/${id}`, {
                 method: "GET",
                 credentials: "include",
                 headers: {

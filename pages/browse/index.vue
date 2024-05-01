@@ -23,8 +23,9 @@
   <script setup lang="ts">
 
 import { ref, watchEffect } from "vue";
+import { useAuthStore } from "~/store/auth";
 
-  const prefix = process.env.PREFIX_URL
+  const {user} = useAuthStore();
   const router = useRouter()
 
   const files = ref([]);
@@ -43,10 +44,16 @@ import { ref, watchEffect } from "vue";
   }
 });
 
+  onMounted(()=>{
+    if(!user){
+      router.push("/login")
+    }
+  })
+
   watchEffect(() => {
     const fetchFiles = async() => {
     try{
-      const res = await fetch("http://localhost:3000/api/get-files", {
+      const res = await fetch("/api/get-files", {
         method: "GET",
         credentials: "include",
         headers: {
