@@ -98,6 +98,7 @@ const onSubmit = async (event: Event) => {
     console.log("Registration successful");
   } catch (err) {
     console.log(err);
+    alert("An error occurred. Please try again.");
   }
 };
 </script>

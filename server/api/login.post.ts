@@ -38,5 +38,9 @@ export default defineEventHandler(async(event)=>{
 
     } catch(e){
         console.error(e)
+        return{
+            statusCode: 500,
+            message: "Internal server error"
+        }
     }
 })

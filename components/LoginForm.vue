@@ -95,6 +95,7 @@ const onSubmit = async (event: Event) => {
     }
   } catch (err) {
     console.error(err);
+    alert("Unable to login. Please try again.");
   }
 };
 </script>
