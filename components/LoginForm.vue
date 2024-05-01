@@ -36,6 +36,7 @@ const onSubmit = async (event: Event) => {
       }),
     });
     if (!res.ok) {
+      alert("Unable to login. Please try again.");
       throw createError({
         message: "An error occurred",
         statusCode: res.status,
